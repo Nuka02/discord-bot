@@ -55,17 +55,15 @@ client.on("message", (message) => {
     distube.skip(message);
     message.reply("Song skipped");
   } else if (command === "autoplay") {
-    let mode = distube.toggleAutoplay(message);
-    message.channel.send(
-      "Set autoplay mode to `" + (mode ? "On" : "Off") + "`"
-    );
+    const mode = distube.toggleAutoplay(message);
+    message.channel.send(`Set autoplay mode to ${mode ? "On" : "Off"}.`);
   } else if (command === "loop") {
     if (!(args[0] !== "on" || args[0] !== "off")) return;
-    let mode =
+    const mode =
       args[0] === "off"
         ? distube.setRepeatMode(message, 0)
         : distube.setRepeatMode(message, 1);
-    message.channel.send(`Set repeat mode to ${mode === 0 ? "off" : "on"}.`);
+    message.channel.send(`Set repeat mode to ${mode === 0 ? "Off" : "On"}.`);
   } else if (command === "current") {
     const queue = distube.getQueue(message);
     if (!queue) return;
@@ -76,7 +74,7 @@ client.on("message", (message) => {
       })\`\nRequested by: ${song.user}\n${stts(queue)}`
     );
   } else if (command === "queue") {
-    let queue = distube.getQueue(message);
+    const queue = distube.getQueue(message);
     message.channel.send(
       "Current queue:\n" +
         queue.songs
@@ -88,7 +86,7 @@ client.on("message", (message) => {
     );
   } else if (command === "jump") {
     const num = parseInt(args[0]) - 1;
-    let queue = distube.getQueue(message);
+    const queue = distube.getQueue(message);
     if (!queue) {
       message.reply("No songs in queue");
       return;
