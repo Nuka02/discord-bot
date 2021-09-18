@@ -46,12 +46,12 @@ client.on("message", (message) => {
     distube.play(message, args.join(" "));
   } else if (command === "stop") {
     const queue = distube.getQueue(message);
-    if (!queue) return;
+    checkQueue(message, queue);
     distube.stop(message);
     message.reply("Music stopped");
   } else if (command === "skip") {
     const queue = distube.getQueue(message);
-    if (!queue) return;
+    checkQueue(message, queue);
     distube.skip(message);
     message.reply("Song skipped");
   } else if (command === "autoplay") {
@@ -66,7 +66,7 @@ client.on("message", (message) => {
     message.channel.send(`Set repeat mode to ${mode === 0 ? "Off" : "On"}.`);
   } else if (command === "current") {
     const queue = distube.getQueue(message);
-    if (!queue) return;
+    checkQueue(message, queue);
     const song = queue.songs[0];
     message.channel.send(
       `Playing \`${song.name}\` - \`[${song.formattedDuration}](${
@@ -75,6 +75,7 @@ client.on("message", (message) => {
     );
   } else if (command === "queue") {
     const queue = distube.getQueue(message);
+    checkQueue(message, queue);
     message.channel.send(
       "Current queue:\n" +
         queue.songs
@@ -87,10 +88,7 @@ client.on("message", (message) => {
   } else if (command === "jump") {
     const num = parseInt(args[0]) - 1;
     const queue = distube.getQueue(message);
-    if (!queue) {
-      message.reply("No songs in queue");
-      return;
-    }
+    checkQueue(message, queue);
     if (num > queue.songs.length || num < 1) {
       message.reply("Invalid Song");
       return;
@@ -103,12 +101,17 @@ client.on("message", (message) => {
     );
   } else if (command === "info") {
     message.reply(
-      `Custom built music bot for Discord.\nType *?help* for more commands. If you want a certain command implemented, message @muke.\nCurrent version: v1.0.3`
+      `Custom built music bot for Discord.\nType *?help* for more commands. If you want a certain command implemented, message @muke.\nCurrent version: v1.0.4`
     );
   } else {
     message.reply("Unknown command");
   }
 });
+
+const checkQueue = (message, queue) => {
+  if (!queue) message.reply("No songs in queue");
+  return;
+};
 
 // Queue status template
 const stts = (queue) =>
