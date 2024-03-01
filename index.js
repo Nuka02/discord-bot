@@ -23,8 +23,7 @@ const client = new Client({
 });
 
 
-
-const distube = new DisTube(client, {
+const distube = new DisTube.defaultMaxListeners(client, {
   plugins: [new YtDlpPlugin({ update: true })],
   searchSongs: false,
   emitNewSongOnly: false,
