@@ -1,34 +1,27 @@
 require("dotenv").config({ path: __dirname + "/.env" });
-const { Client, GatewayIntentBits } = require("discord.js");
-const {DisTube} = require("distube");
-const { YtDlpPlugin } = require("@distube/yt-dlp");
+const Discord = require("discord.js");
+const Distube = require("distube");
 const prefix = "?";
 const token = process.env["TOKEN"];
-const client = new Client({
+const client = new Discord.Client({
   restTimeOffset: 0, // reaction speed fastest
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildVoiceStates,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-    // Add other necessary intents for your bot
-  ],
-  // presence: {
-    // status: "dnd",
+  presence: {
+    status: "dnd",
     // activity: {
     //   name: "Custom music bot for Discord",
     //   type: "PLAYING",
     // },
-  // },
+  },
 });
 
-
-const distube = new DisTube(client, {
-  plugins: [new YtDlpPlugin({ update: true })],
-  searchSongs: 0,
+const distube = new Distube(client, {
+  searchSongs: false,
   emitNewSongOnly: false,
+  highWaterMark: 1024 * 1024 * 64,
   leaveOnEmpty: true,
   leaveOnFinish: true,
+  youtubeDL: true,
+  updateYoutubeDL: true,
 });
 
 client.login(token);
