@@ -24,7 +24,7 @@ const client = new Client({
 
 
 
-const distube = new DisTube.default(client, {
+const distube = new DisTube(client, {
   plugins: [new YtDlpPlugin({ update: true })],
   searchSongs: false,
   emitNewSongOnly: false,
