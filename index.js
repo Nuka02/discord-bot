@@ -3,8 +3,15 @@ const Discord = require("discord.js");
 const Distube = require("distube");
 const prefix = "?";
 const token = process.env["TOKEN"];
-const client = new Discord.Client({
+const client = new Client({
   restTimeOffset: 0, // reaction speed fastest
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    // Add other necessary intents for your bot
+  ],
   presence: {
     status: "dnd",
     // activity: {
@@ -13,6 +20,10 @@ const client = new Discord.Client({
     // },
   },
 });
+
+const { Client, GatewayIntentBits } = require('discord.js');
+
+
 
 const distube = new Distube(client, {
   searchSongs: false,
