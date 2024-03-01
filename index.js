@@ -29,7 +29,6 @@ const distube = new DisTube(client, {
   emitNewSongOnly: false,
   leaveOnEmpty: true,
   leaveOnFinish: true,
-  youtubeDL: false,
 });
 
 client.login(token);
