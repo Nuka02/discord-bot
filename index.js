@@ -13,13 +13,13 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
     // Add other necessary intents for your bot
   ],
-  presence: {
-    status: "dnd",
+  // presence: {
+    // status: "dnd",
     // activity: {
     //   name: "Custom music bot for Discord",
     //   type: "PLAYING",
     // },
-  },
+  // },
 });
 
 
