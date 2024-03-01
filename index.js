@@ -1,6 +1,6 @@
 require("dotenv").config({ path: __dirname + "/.env" });
 const { Client, GatewayIntentBits } = require("discord.js");
-const Distube = require("distube");
+const {Distube} = require("distube");
 const { YtDlpPlugin } = require("@distube/yt-dlp");
 const prefix = "?";
 const token = process.env["TOKEN"];
@@ -27,7 +27,6 @@ const distube = new Distube(client, {
   plugins: [new YtDlpPlugin({ update: true })],
   searchSongs: false,
   emitNewSongOnly: false,
-  highWaterMark: 1024 * 1024 * 64,
   leaveOnEmpty: true,
   leaveOnFinish: true,
   youtubeDL: false,
