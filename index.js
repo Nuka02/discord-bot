@@ -1,6 +1,6 @@
 require("dotenv").config({ path: __dirname + "/.env" });
 const {Client, GatewayIntentBits} = require("discord.js");
-const Distube = require("distube");
+const {Distube} = require("distube");
 const prefix = "?";
 const token = process.env["TOKEN"];
 const client = new Client({
