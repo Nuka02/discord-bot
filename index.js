@@ -1,9 +1,9 @@
 require("dotenv").config({ path: __dirname + "/.env" });
-const Discord = require("discord.js");
+const {Client, GatewayIntentBits} = require("discord.js");
 const Distube = require("distube");
 const prefix = "?";
 const token = process.env["TOKEN"];
-const client = new Discord.Client({
+const client = new Client({
   restTimeOffset: 0, // reaction speed fastest
   intents: [
     GatewayIntentBits.Guilds,
@@ -20,8 +20,6 @@ const client = new Discord.Client({
     // },
   },
 });
-
-const { Client, GatewayIntentBits } = require('discord.js');
 
 
 
