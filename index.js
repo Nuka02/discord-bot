@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 const Distube = require("distube");
 const prefix = "?";
 const token = process.env["TOKEN"];
-const client = new Client({
+const client = new Discord.Client({
   restTimeOffset: 0, // reaction speed fastest
   intents: [
     GatewayIntentBits.Guilds,
